@@ -1,0 +1,148 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+:root {
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Purple Brand Colors */
+  --color-purple-50: #F5F3FF;
+  --color-purple-100: #EDE9FE;
+  --color-purple-200: #DDD6FE;
+  --color-purple-300: #C4B5FD;
+  --color-purple-400: #A78BFA;
+  --color-purple-500: #9A6CFF;
+  --color-purple-600: #7C4DFF;
+  --color-purple-700: #6A3DF0;
+  --color-purple-800: #5B2FE0;
+  --color-purple-900: #4C1D95;
+  --color-purple-950: #2E1065;
+
+  /* Background Colors */
+  --color-background-primary: #0B0B0E;
+  --color-background-secondary: #111114;
+  --color-background-card: #0F0F13;
+
+  /* Text Colors */
+  --color-text-title: #FFFFFF;
+  --color-text-body: #C7C7D1;
+  --color-text-muted: #9A9AA6;
+
+  /* Border Colors */
+  --color-border-default: rgba(255, 255, 255, 0.08);
+  --color-border-focus: #7C4DFF;
+
+  /* Status Colors */
+  --color-success: #2ED573;
+  --color-warning: #FFA502;
+  --color-error: #FF4757;
+
+  /* Spacing Scale */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 24px;
+  --spacing-3xl: 32px;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --shadow-button: 0 6px 20px rgba(124, 77, 255, 0.4);
+
+  /* Transitions */
+  --transition-default: all 0.25s ease;
+}
+
+/* Global Styles */
+body {
+  background-color: var(--color-background-primary);
+  color: var(--color-text-body);
+  font-family: var(--font-sans);
+}
+
+/* Card Component Styles */
+.card {
+  background-color: var(--color-background-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-default);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-2xl);
+}
+
+/* Button Primary Styles */
+.button-primary {
+  height: 48px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(to right, #7C4DFF, #9A6CFF);
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  box-shadow: var(--shadow-button);
+  transition: var(--transition-default);
+}
+
+.button-primary:hover {
+  background: linear-gradient(to right, #6A3DF0, #8A5CFF);
+}
+
+.button-primary:active {
+  background: linear-gradient(to right, #5B2FE0, #7A4CEF);
+}
+
+/* Badge Styles */
+.badge {
+  font-size: 12px;
+  color: var(--color-text-body);
+  gap: 6px;
+}
+
+.badge-icon {
+  color: var(--color-purple-600);
+}
+
+/* Layout Container */
+.container-mobile {
+  max-width: 360px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 0 auto;
+}
+
+/* Typography Scale */
+.text-h1 {
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--color-text-title);
+}
+
+.text-h2 {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+  color: var(--color-text-title);
+}
+
+.text-body {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-text-body);
+}
+
+.text-caption {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}

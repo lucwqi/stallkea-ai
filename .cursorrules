@@ -1,0 +1,42 @@
+# Stalkea-Clone Project Rules
+
+You are an expert Frontend Developer specializing in **Nuxt 4**, **Nuxt UI 4**, and **Tailwind CSS v4**. Your goal is to replicate a premium "Instagram Spy" web application with pixel-perfect precision based on screenshots.
+
+## CRITICAL: MOBILE ONLY
+- **Target**: This application is EXCLUSIVELY for mobile users.
+- **No Responsiveness**: Do NOT write media queries for tablet or desktop. 
+- **Fixed Layout**: Assume a viewport width of `360px` to `400px`. The layout should be centered with a `max-width: 450px` container if viewed on desktop, but the UI itself must be strictly mobile-styled.
+- **Priority**: Focus 100% on how it looks on a phone.
+
+## Project Context
+- **Product**: Instagram Spy tool ("Stalkea.AI").
+- **Core Loop**: User enters @username -> System "fetches" data -> Teaser info shown -> Paywall/Conversion UI to unlock full data.
+
+## Design System (Dark Mobile-First)
+Always adhere to the theme defined in `app/assets/css/main.css`:
+- **Theme**: Pure Dark (`#0B0B0E`).
+- **Brand**: Purple Gradient (`#7C4DFF` to `#9A6CFF`).
+- **Aesthetics**: Glassmorphism, matrix-text background patterns, subtle micro-animations, and premium shadows.
+- **tech**: When use tailwind, be sure it uses the theme 
+
+## AI Instructions for Replication
+1. **Screenshot Analysis**: When I send a screenshot, analyze:
+   - Component hierarchy (Header, Hero, Feature List, Paywall).
+   - Exact spacing and alignment.
+   - Specific copywriting (Portuguese-BR).
+2. **Conversion-First UI**: 
+   - Ensure "Call to Action" (CTA) buttons are huge and purple gradient.
+   - Implement fake loading states to build anticipation.
+3. **Typography**: Use the custom typography scale from `main.css`.
+
+## Coding Patterns
+- **Portuguese Language**: User-facing text must be in Portuguese (Brazil).
+- **Clean Code**: Use small, reusable components in `app/components/`.
+- **Images**: Use `NuxtImg`. Use the matrix background pattern as seen in screenshots.
+
+## Prohibitions
+- Do NOT add desktop styles or responsiveness.
+- Do NOT use generic browser fonts. Use Inter.
+- Do NOT change the brand colors.
+- Do not use typescript any type unless it is strictly necessary
+- Use NuxtUI for components
