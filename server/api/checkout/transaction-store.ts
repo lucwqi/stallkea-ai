@@ -25,30 +25,52 @@ export type PixTransaction = {
   processed?: boolean
 }
 
-const DATA_DIR = join(process.cwd(), '.data')
-const DB_PATH = join(DATA_DIR, 'pix-transactions.json')
+// In-memory fallback for Vercel
+const memoryStore: PixTransaction[] = []
+const isVercel = process.env.VERCEL === '1' || process.env.NODE_ENV === 'production'
+const DATA_DIR = !isVercel ? join(process.cwd(), '.data') : ''
+const DB_PATH = !isVercel ? join(DATA_DIR, 'pix-transactions.json') : ''
 
 const ensureDbFile = async () => {
-  await fs.mkdir(DATA_DIR, { recursive: true })
-  const exists = await fs
-    .stat(DB_PATH)
-    .then(() => true)
-    .catch(() => false)
+  if (isVercel) return
+  try {
+    await fs.mkdir(DATA_DIR, { recursive: true })
+    const exists = await fs
+      .stat(DB_PATH)
+      .then(() => true)
+      .catch(() => false)
 
-  if (!exists) {
-    await fs.writeFile(DB_PATH, '[]', 'utf-8')
+    if (!exists) {
+      await fs.writeFile(DB_PATH, '[]', 'utf-8')
+    }
+  } catch (e) {
+    console.warn('Could not ensure db file:', e)
   }
 }
 
 export const readTransactions = async (): Promise<PixTransaction[]> => {
-  await ensureDbFile()
-  const content = await fs.readFile(DB_PATH, 'utf-8')
-  return JSON.parse(content || '[]') as PixTransaction[]
+  if (isVercel) return memoryStore
+  try {
+    await ensureDbFile()
+    const content = await fs.readFile(DB_PATH, 'utf-8')
+    return JSON.parse(content || '[]') as PixTransaction[]
+  } catch (e) {
+    return []
+  }
 }
 
 export const writeTransactions = async (transactions: PixTransaction[]) => {
-  await ensureDbFile()
-  await fs.writeFile(DB_PATH, JSON.stringify(transactions, null, 2), 'utf-8')
+  if (isVercel) {
+    // Replace memoryStore contents
+    memoryStore.splice(0, memoryStore.length, ...transactions)
+    return
+  }
+  try {
+    await ensureDbFile()
+    await fs.writeFile(DB_PATH, JSON.stringify(transactions, null, 2), 'utf-8')
+  } catch (e) {
+    console.warn('Could not write transactions:', e)
+  }
 }
 
 export const getTransaction = async (transactionId: string) => {

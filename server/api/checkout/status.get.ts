@@ -8,10 +8,7 @@ export default defineEventHandler(async (event) => {
         throw createError({ statusCode: 400, statusMessage: 'transactionId is required' })
     }
 
-    const existing = await getTransaction(transactionId)
-    if (!existing) {
-        throw createError({ statusCode: 404, statusMessage: 'Transaction not found' })
-    }
+    const existing = await getTransaction(transactionId).catch(() => null)
 
     const gatewayUrl = process.env.DUTTYFY_PIX_URL_ENCRYPTED || 'https://www.pagamentos-seguros.app/api-pix/W_yEy5NQna0jUTvrFkCbw56cSi1xJTE5ISMqWHmi65d6u4DC-Z7HRzyJMN8wO5mVsOaag8j5Hh1KwLATavkEBg'
 
@@ -36,6 +33,6 @@ export default defineEventHandler(async (event) => {
             throw error
         }
 
-        return { status: existing.status }
+        return { status: existing?.status || 'PENDING' }
     }
 })

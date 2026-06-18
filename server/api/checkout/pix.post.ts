@@ -244,6 +244,11 @@ export default defineEventHandler(async (event) => {
             statusCode: error?.statusCode,
             stack: error?.stack
         })
-        throw error
+        setResponseStatus(event, error?.statusCode || 500)
+        return {
+            error: true,
+            message: error?.statusMessage || error?.message || 'Server Error',
+            details: error?.stack
+        }
     }
 })
