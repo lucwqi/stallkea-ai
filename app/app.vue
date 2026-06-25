@@ -43,7 +43,7 @@ fbq('track', 'PageView');`
   ],
   noscript: [
     {
-      innerHTML: <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1356708019716752&ev=PageView&noscript=1" />
+      innerHTML: `<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1356708019716752&ev=PageView&noscript=1" />`
     }
   ]
 })
